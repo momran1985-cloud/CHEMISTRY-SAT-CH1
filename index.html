@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>منصة اختبارات تحصيلي — الكيمياء (المادة والتفاعلات)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#10264a; --ink2:#34476b; --paper:#f6f3e9; --card:#ffffff; --line:#dcd6c3;
+  --teal:#0e7c86; --teal-d:#0a5c64; --amber:#f59e0b; --ok:#15803d; --okbg:#e7f6ec; --bad:#b91c1c; --badbg:#fdeaea;
+  --r:16px; --shadow:0 6px 22px rgba(16,38,74,.10);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif;color:var(--ink);background:var(--paper);
+  background-image:linear-gradient(rgba(14,124,134,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(14,124,134,.07) 1px,transparent 1px);
+  background-size:28px 28px;line-height:1.7;min-height:100vh}
+button{font-family:inherit;cursor:pointer}
+bdi{unicode-bidi:isolate}
+.wrap{max-width:980px;margin:0 auto;padding:16px}
+.btn{border:0;border-radius:12px;padding:11px 20px;font-size:1rem;font-weight:700;background:var(--teal);color:#fff;transition:transform .12s,background .15s,box-shadow .15s;box-shadow:0 3px 0 var(--teal-d)}
+.btn:hover{background:#0b6e77}.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--teal-d)}
+.btn.sec{background:#fff;color:var(--ink);box-shadow:0 3px 0 var(--line);border:1.5px solid var(--line)}
+.btn.sec:hover{background:#fbf9f1}
+.btn.amber{background:var(--amber);color:#3b2600;box-shadow:0 3px 0 #b97800}
+.btn.red{background:var(--bad);box-shadow:0 3px 0 #7f1212}
+.btn.sm{padding:7px 14px;font-size:.9rem}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--line)}
+.top{background:var(--ink);color:#fff;border-radius:0 0 22px 22px;padding:14px 16px;margin:0 -16px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.top .brand{display:flex;align-items:center;gap:10px;flex:1;min-width:220px}
+.top .brand b{font-size:1.1rem;font-weight:800}
+.top .brand small{display:block;opacity:.75;font-size:.8rem;font-weight:400}
+.chip{background:rgba(255,255,255,.14);padding:5px 12px;border-radius:99px;font-size:.88rem}
+h1,h2,h3{margin:0 0 8px;line-height:1.35}
+/* login */
+.login{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:center;min-height:calc(100vh - 32px)}
+.hero{padding:10px 6px}
+.hero .tag{display:inline-block;background:var(--ink);color:#fff;border-radius:99px;padding:4px 14px;font-size:.85rem;margin-bottom:12px}
+.hero h1{font-size:2.1rem;font-weight:800}
+.hero h1 span{color:var(--teal)}
+.hero p{color:var(--ink2);font-size:1.02rem;max-width:520px}
+.hero svg{width:100%;max-width:470px;margin-top:8px}
+.hero .trace{stroke-dasharray:640;stroke-dashoffset:640;animation:draw 3.2s .3s ease forwards}
+.hero .dot{offset-path:path('M20 150 C 90 150, 120 140, 170 100 S 260 20, 330 20');animation:go 3.2s .3s ease forwards;offset-distance:0%}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes go{to{offset-distance:100%}}
+.form{padding:26px}
+.form h2{font-size:1.4rem}
+label{display:block;font-weight:700;margin:14px 0 5px}
+input[type=text],input[type=tel]{width:100%;font:inherit;padding:12px 14px;border:1.8px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+input:focus{outline:3px solid rgba(14,124,134,.25);border-color:var(--teal)}
+.hint{font-size:.85rem;color:var(--ink2)}
+.err{color:var(--bad);font-weight:700;margin-top:10px;min-height:1.4em}
+/* home */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat{padding:12px 14px;text-align:center}
+.stat b{display:block;font-size:1.6rem;font-weight:800;color:var(--teal)}
+.stat span{font-size:.85rem;color:var(--ink2)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.scard{padding:16px 18px;position:relative;overflow:hidden;border-top:6px solid var(--c)}
+.scard .num{position:absolute;left:12px;top:4px;font-size:3.6rem;font-weight:800;color:var(--c);opacity:.13;line-height:1}
+.scard h3{font-size:1.08rem;padding-left:44px}
+.sum{margin:0 0 10px;background:#f6f9fc;border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:.88rem}.sum summary{cursor:pointer;font-weight:700;color:var(--ink)}.sum ul{margin:6px 0 2px;padding-inline-start:18px;line-height:1.7}
+.scard .meta{color:var(--ink2);font-size:.88rem;margin-bottom:10px}
+.scard .row{display:flex;gap:8px;flex-wrap:wrap}
+.scard .best{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
+.pill{font-size:.78rem;padding:2px 10px;border-radius:99px;background:#eef3f4;color:var(--ink2);border:1px solid var(--line)}
+.pill.good{background:var(--okbg);color:var(--ok);border-color:#b7e1c4}
+.final{margin-top:14px;padding:20px;background:linear-gradient(135deg,var(--ink),#1c3d78);color:#fff;border:0;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.final h3{font-size:1.3rem;margin:0}.final p{margin:2px 0 0;opacity:.85}
+.final .grow{flex:1;min-width:220px}
+.foot{margin:22px 0 8px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.credit{text-align:center;color:var(--ink2);font-size:.88rem;margin:10px 0 24px}
+.credit a{color:var(--teal);font-weight:700;text-decoration:none}
+/* quiz */
+.qbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.qbar .t{font-weight:800;flex:1;min-width:180px}
+.timer{font-variant-numeric:tabular-nums;direction:ltr;background:var(--ink);color:#fff;padding:3px 12px;border-radius:99px;font-weight:700}
+.timer.low{background:var(--bad);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.6}}
+.prog{height:9px;background:#e4dfcc;border-radius:99px;overflow:hidden;margin-bottom:14px}
+.prog i{display:block;height:100%;background:var(--c,var(--teal));border-radius:99px;transition:width .35s}
+.qcard{padding:20px}
+.qcard.in{animation:in .3s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.qn{display:inline-block;background:var(--c,var(--teal));color:#fff;border-radius:8px;padding:0 10px;font-weight:800;margin-bottom:8px;font-size:.9rem}
+.qt{font-size:1.2rem;font-weight:700;margin-bottom:12px}
+.fig{background:#fffdf6;border:1px dashed var(--line);border-radius:12px;padding:8px;margin:6px 0 14px;max-width:440px}
+.fig svg{width:100%;height:auto;direction:ltr;display:block}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:right;width:100%;background:#fff;border:2px solid var(--line);border-radius:14px;padding:11px 14px;font-size:1.05rem;color:var(--ink);transition:border-color .12s,background .12s,transform .1s}
+.opt:hover{border-color:var(--teal);background:#f3fafb}
+.opt .l{flex:none;width:34px;height:34px;border-radius:50%;background:#eef3f4;display:grid;place-items:center;font-weight:800}
+.opt.sel{border-color:var(--teal);background:#e6f5f6}.opt.sel .l{background:var(--teal);color:#fff}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.ok .l{background:var(--ok);color:#fff}
+.opt.no{border-color:var(--bad);background:var(--badbg)}.opt.no .l{background:var(--bad);color:#fff}
+.opt.lock{pointer-events:none}
+.fb{margin-top:14px;border-radius:14px;padding:13px 16px;animation:in .3s}
+.fb.ok{background:var(--okbg);border:1.5px solid #9ed3ae}.fb.no{background:var(--badbg);border:1.5px solid #eeb0b0}
+.fb b.h{display:block;font-size:1.05rem;margin-bottom:2px}
+.nav{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.dots button{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--line);background:#fff;font-weight:700;color:var(--ink)}
+.dots button.done{background:#d9eef0;border-color:var(--teal)}
+.dots button.cur{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* result */
+.res{padding:24px;text-align:center}
+.ring{width:170px;height:170px;margin:4px auto 6px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .c{position:absolute;inset:0;display:grid;place-items:center;font-size:2.2rem;font-weight:800}
+.ring .c small{display:block;font-size:.85rem;font-weight:500;color:var(--ink2);margin-top:-8px}
+.kv{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.kv div{background:#f4f1e6;border-radius:12px;padding:8px}.kv b{display:block;font-size:1.25rem}.kv span{font-size:.82rem;color:var(--ink2)}
+.msg{font-size:1.15rem;font-weight:700;margin:8px 0}
+.medal{display:inline-flex;align-items:center;gap:8px;background:#fff6dd;border:1.5px solid #f0cf72;color:#7a5200;padding:6px 16px;border-radius:99px;font-weight:800;margin:6px 0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.rv{margin-top:18px;text-align:right}
+.rvi{padding:14px 16px;margin-bottom:10px;border-right:6px solid var(--line)}
+.rvi.ok{border-right-color:var(--ok)}.rvi.no{border-right-color:var(--bad)}
+.rvi .q{font-weight:700;margin-bottom:6px}
+.rvi .ans{font-size:.95rem}
+.rvi .ex{margin-top:6px;color:var(--ink2);font-size:.95rem}
+.tag2{display:inline-block;font-size:.78rem;padding:1px 9px;border-radius:99px;margin-left:6px;font-weight:700}
+.tag2.ok{background:var(--okbg);color:var(--ok)}.tag2.no{background:var(--badbg);color:var(--bad)}.tag2.sk{background:#eee;color:#555}
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(10,24,48,.55);display:grid;place-items:center;padding:16px;z-index:50}
+.modal{background:#fff;border-radius:18px;padding:22px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);animation:in .25s}
+.modal h3{font-size:1.25rem}
+.modal ul{padding-right:20px;margin:8px 0}
+.chk{display:flex;gap:8px;align-items:center;font-weight:500;margin:12px 0}
+.chk input{width:20px;height:20px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 20px;border-radius:99px;z-index:90;font-weight:700;animation:in .25s}
+/* certificate */
+#cert{display:none}
+#cert.show{display:block;position:fixed;inset:0;z-index:80;background:rgba(10,24,48,.7);overflow:auto;padding:16px}
+.certbox{max-width:900px;margin:0 auto}
+.certbar{display:flex;gap:10px;justify-content:center;margin-bottom:12px}
+.cpage{background:#fffdf5;border:14px double #b8892b;padding:34px 40px;text-align:center;color:#2a2210;position:relative;min-height:520px;display:flex;flex-direction:column;justify-content:center}
+.cpage h1{font-size:2.6rem;color:#8a5f00;margin:0 0 6px;font-weight:800}
+.cpage .nm{font-size:2.1rem;font-weight:800;border-bottom:2px solid #b8892b;display:inline-block;padding:0 26px;margin:8px auto 14px;color:var(--ink)}
+.cpage p{font-size:1.15rem;margin:6px 0}
+.cpage .sig{display:flex;justify-content:space-around;margin-top:26px;font-size:1rem}
+.cpage .sig div{min-width:200px;border-top:1.5px solid #8a7a50;padding-top:6px}
+@media print{
+  body{background:#fff!important}
+  body>*:not(#cert){display:none!important}
+  #cert.show{position:static;background:none;padding:0;overflow:visible}
+  .certbar{display:none}
+  .cpage{min-height:0;height:182mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{size:A4 landscape;margin:10mm}
+}
+@media(max-width:720px){
+  .login{grid-template-columns:1fr;min-height:0;padding-top:10px}
+  .hero h1{font-size:1.6rem}
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .qt{font-size:1.08rem}
+  .kv{grid-template-columns:repeat(3,1fr)}
+  .cpage{padding:20px 14px}.cpage h1{font-size:1.8rem}.cpage .nm{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div id="cert"></div>
+<script>
+const M=(q,c,w,e)=>({q,o:[c,...w],e});
+const D={};
+/* ===== 1 فروع الكيمياء وغاز الأوزون ===== */
+D.s1=[
+M('علم الكيمياء هو العلم الذي يدرس','المادة وتركيبها وخواصها وتغيراتها والطاقة المصاحبة لها',['الكائنات الحية فقط','الأرض وطبقاتها فقط','القوى والحركة'],'الكيمياء علم المادة وتحولاتها.'),
+M('الفرع الذي يهتم بتحديد مكونات المادة وكمياتها هو الكيمياء','التحليلية',['العضوية','الفيزيائية','الحيوية'],'التحليلية: تعرّف المكونات (نوعي) وقياس كمياتها (كمي).'),
+M('الفرع الذي يدرس مركبات الكربون هو الكيمياء','العضوية',['غير العضوية','التحليلية','الفيزيائية'],'مثل البلاستيك والوقود والأدوية.'),
+M('الفرع الذي يدرس الفلزات والمعادن والأملاح هو الكيمياء','غير العضوية',['العضوية','الحيوية','التحليلية'],'تدرس المركبات التي لا تقوم أساساً على سلاسل الكربون والهيدروجين.'),
+M('دراسة الطاقة المصاحبة للتفاعلات وسرعتها تتبع الكيمياء','الفيزيائية',['العضوية','التحليلية','غير العضوية'],'تجمع بين الكيمياء والفيزياء.'),
+M('دراسة التفاعلات الكيميائية داخل أجسام الكائنات الحية تتبع الكيمياء','الحيوية',['الفيزيائية','التحليلية','غير العضوية'],'كالهضم والتنفس الخلوي.'),
+M('تحديد كمية الرصاص في عينة ماء ملوث عمل في الكيمياء','التحليلية',['العضوية','الحيوية','الفيزيائية'],'تحديد مقدار مكوّن في عينة = تحليل كمي.'),
+M('دراسة تركيب البروتينات والإنزيمات تتبع الكيمياء','الحيوية',['غير العضوية','التحليلية','الفيزيائية'],'مركبات حيوية.'),
+M('دراسة تركيب البنزين والبلاستيك تتبع الكيمياء','العضوية',['غير العضوية','الحيوية','التحليلية'],'مركبات كربونية.'),
+M('دراسة عوامل تأثر سرعة التفاعل الكيميائي تتبع الكيمياء','الفيزيائية',['العضوية','الحيوية','غير العضوية'],'الحركية الكيميائية فرع من الفيزيائية.'),
+M('الصيغة الكيميائية لغاز الأوزون','O₃',['O₂','O','CO₂'],'جزيء الأوزون يتكون من ثلاث ذرات أكسجين.'),
+M('توجد طبقة الأوزون الواقية في','الستراتوسفير',['التروبوسفير','الثيرموسفير','الميزوسفير'],'على ارتفاع نحو 15–35 km.'),
+M('الوظيفة الرئيسة لطبقة الأوزون في الستراتوسفير','امتصاص معظم الأشعة فوق البنفسجية الضارة',['إنتاج الأكسجين للتنفس','تدفئة سطح الأرض','تكوين الأمطار'],'تحمي الكائنات الحية من UV.'),
+M('المركبات المسؤولة عن تآكل طبقة الأوزون','الكلوروفلوروكربونات (CFCs)',['ثاني أكسيد الكربون','النيتروجين','بخار الماء'],'تتحرر منها ذرات كلور تهدم الأوزون.'),
+M('وحدة قياس سمك طبقة الأوزون','وحدة دوبسون (DU)',['الواط','المول','الباسكال'],'DU وحدة سمك الأوزون في العمود الجوي.'),
+M('متوسط سمك طبقة الأوزون الطبيعي نحو','300 DU',['30 DU','3000 DU','100 DU'],'السمك الطبيعي حوالي 300 DU.'),
+M('يُعد ثقب الأوزون عندما يقل سمك الطبقة عن','220 DU',['300 DU','500 DU','1000 DU'],'القيمة المرجعية لتعريف الثقب.'),
+M('الأوزون عند سطح الأرض (التروبوسفير) يُعد','ملوثاً ضاراً بالصحة',['مفيداً دائماً','مصدراً للأكسجين','غير مؤثر'],'يسبب تهيج الجهاز التنفسي.'),
+M('الاتفاقية الدولية للحد من المواد المستنزفة للأوزون','بروتوكول مونتريال',['اتفاقية كيوتو','اتفاقية باريس','معاهدة أوتاوا'],'اتفاق 1987 لتقليل CFCs.'),
+M('من مصادر CFCs قديماً','المبردات وعبوات الرذاذ',['السيارات الكهربائية','المحاصيل','الأمطار'],'استخدمت في الثلاجات والمكيفات.'),
+M('من أضرار زيادة الأشعة فوق البنفسجية الواصلة للأرض','سرطان الجلد وإعتام عدسة العين',['زيادة المطر','انخفاض الحرارة','قوة العظام'],'نتيجة نقص الأوزون.'),
+M('عدد ذرات الأكسجين في جزيء الأوزون','3',['2','1','4'],'O₃.'),
+M('تتحلل CFCs بالأشعة فوق البنفسجية وتتحرر منها ذرات','الكلور',['الهيدروجين','الصوديوم','الكربون وحده'],'الكلور يحفز تكسير الأوزون.'),
+M('ذرة كلور واحدة قادرة على تكسير','آلاف جزيئات الأوزون',['جزيء واحد فقط','جزيئين','لا تؤثر'],'لأنها تعمل كحفاز تتجدد.'),
+M('لون غاز الأوزون ورائحته','أزرق باهت ورائحة نفاذة',['عديم اللون والرائحة','أخضر بلا رائحة','أحمر برائحة البيض'],'من خواصه الفيزيائية.'),
+M('طبقة الجو التي نعيش فيها تسمى','التروبوسفير',['الستراتوسفير','الميزوسفير','الأيونوسفير'],'أدنى طبقات الغلاف الجوي.'),
+M('تتكون طبقة الأوزون طبيعياً عندما تتفكك جزيئات','الأكسجين O₂ بالأشعة فوق البنفسجية فتتحد ذراته مع O₂',['النيتروجين','الماء','CO₂'],'O + O₂ → O₃.')
+];
+/* ===== 2 المادة وحالاتها ===== */
+D.s2=[
+M('المادة هي كل ما','له كتلة ويشغل حيزاً',['له لون فقط','يمكن رؤيته','يتحرك'],'تعريف المادة.'),
+M('الكتلة هي','مقياس لكمية المادة في الجسم',['قوة جذب الأرض','حجم الجسم','كثافته'],'تقاس بـ kg ولا تتغير بتغير المكان.'),
+M('الحالة التي لها شكل وحجم ثابتان','الصلبة',['السائلة','الغازية','البلازما'],'جسيماتها متقاربة وترتج في أماكنها.'),
+M('الحالة التي لها حجم ثابت وتأخذ شكل الوعاء','السائلة',['الصلبة','الغازية','البلازما'],'جسيماتها تنزلق.'),
+M('الحالة التي ليس لها شكل ولا حجم ثابتان','الغازية',['الصلبة','السائلة','البلورية'],'جسيماتها متباعدة وحرة.'),
+M('الحالة الرابعة للمادة وتوجد في الشمس والنجوم','البلازما',['البلورة','الجل','المعلق'],'غاز متأين.'),
+M('تحول الصلب إلى سائل يسمى','انصهار',['تجمد','تبخر','تسامي'],'يمتص حرارة.'),
+M('تحول السائل إلى صلب يسمى','تجمد',['انصهار','تكاثف','ترسب'],'يطلق حرارة.'),
+M('تحول السائل إلى غاز يسمى','تبخر',['تكاثف','تجمد','ترسب'],'يمتص حرارة.'),
+M('تحول الغاز إلى سائل يسمى','تكاثف',['تبخر','تسامي','انصهار'],'مثل الندى على الأوراق.'),
+M('تحول الصلب مباشرة إلى غاز يسمى','تسامي',['ترسب','تبخر','انصهار'],'مثل الثلج الجاف والنفثالين.'),
+M('تحول الغاز مباشرة إلى صلب يسمى','ترسب',['تسامي','تجمد','تكاثف'],'مثل الصقيع على الزجاج.'),
+M('من التحولات الماصة للطاقة','الانصهار والتبخر والتسامي',['التجمد والتكاثف والترسب','التجمد فقط','التكاثف فقط'],'تحتاج حرارة لتتحرر الجسيمات.'),
+M('من التحولات الطاردة للطاقة','التجمد والتكاثف والترسب',['الانصهار والتبخر','التسامي','الانصهار فقط'],'تقل طاقة الجسيمات.'),
+M('تحول الثلج الجاف (CO₂ صلب) إلى غاز مباشرة مثال على','التسامي',['الانصهار','الغليان','الترسب'],'صلب → غاز.'),
+M('الحالة الأعلى طاقة حركية للجسيمات عند درجة الحرارة نفسها غالباً','الغازية',['الصلبة','السائلة','لا فرق'],'تتحرك بحرية أكبر.'),
+M('الحالة التي يسهل ضغطها (انضغاط كبير)','الغازية',['الصلبة','السائلة','كلها'],'المسافات بين جسيماتها كبيرة.'),
+M('تكوّن قطرات الماء على كأس بارد مثال على','التكاثف',['التبخر','الانصهار','التسامي'],'بخار الماء يبرد فيتكاثف.'),
+M('تحول مكعب الثلج إلى ماء مثال على','الانصهار',['التجمد','التكاثف','الترسب'],'صلب → سائل.'),
+M('جفاف الملابس المبللة مثال على','التبخر',['التكاثف','التجمد','التسامي'],'سائل → غاز.'),
+M('تحول بخار الماء إلى بلورات ثلج على النافذة (الصقيع) يسمى','ترسب',['تسامي','انصهار','تكاثف'],'غاز → صلب.'),
+M('الجسيمات في الحالة الصلبة','قريبة جداً وتهتز حول مواقعها',['متباعدة جداً','تتحرك بحرية تامة','ساكنة تماماً'],'ترتج دون انتقال.'),
+M('يتغير شكل الجسم الصلب عند','التأثير بقوة كافية (كالسحق) لكن الكتلة لا تتغير',['تغير كتلته','فقدان ذراته','تحوله إلى غاز'],'تغير فيزيائي.'),
+M('يعتمد وزن الجسم على','الجاذبية',['كمية المادة فقط','الحجم','اللون'],'الوزن قوة، أما الكتلة فثابتة.'),
+M('الغاز في وعاء مغلق يشغل','حجم الوعاء كله',['جزءاً منه فقط','حجماً ثابتاً صغيراً','لا يشغل حيزاً'],'ينتشر بحرية.'),
+M('عند تسخين الماء إلى الغليان تتحول المادة من الحالة','السائلة إلى الغازية',['الصلبة إلى السائلة','الغازية إلى السائلة','السائلة إلى الصلبة'],'تبخر.')
+];
+/* ===== 3 الخواص والتغيرات ===== */
+D.s3=[
+M('الخاصية الفيزيائية هي التي','تُلاحظ دون تغيير تركيب المادة',['تتطلب تفاعلاً كيميائياً','تغير نوع المادة','تحول المادة إلى مادة جديدة'],'مثل اللون والكثافة.'),
+M('الخاصية الكيميائية هي التي','تظهر عند تفاعل المادة وتحولها إلى مادة جديدة',['تُلاحظ بالنظر فقط','تظهر بتغير الحالة','تعتمد على الحجم'],'مثل قابلية الاشتعال.'),
+M('أي مما يأتي خاصية فيزيائية؟','درجة الغليان',['قابلية الاشتعال','الصدأ','التفاعل مع الحمض'],'لا يتغير تركيب المادة عند قياسها.'),
+M('أي مما يأتي خاصية كيميائية؟','قابلية الاشتعال',['الكثافة','اللون','درجة الانصهار'],'تظهر عند الاحتراق.'),
+M('الخاصية الفيزيائية المميزة (لا تعتمد على الكمية) هي','الكثافة',['الكتلة','الحجم','الطول'],'الكثافة ثابتة لكل مادة.'),
+M('خاصية غير مميزة تعتمد على كمية المادة','الكتلة',['الكثافة','درجة الغليان','درجة الانصهار'],'تختلف بتغير الكمية.'),
+M('أي مما يأتي تغير فيزيائي؟','ذوبان السكر في الماء',['احتراق الورق','صدأ الحديد','تعفن الطعام'],'لا تتكون مادة جديدة.'),
+M('أي مما يأتي تغير كيميائي؟','صدأ الحديد',['تجمد الماء','تقطيع الخشب','غليان الماء'],'تتكون مادة جديدة (أكسيد الحديد).'),
+M('احتراق الخشب تغير','كيميائي',['فيزيائي','حالة فقط','لا تغير'],'تتكون رماد وغازات.'),
+M('تحول الماء إلى بخار تغير','فيزيائي',['كيميائي','نووي','لا شيء'],'تركيب الماء H₂O لا يتغير.'),
+M('من دلائل حدوث تغير كيميائي','تكوّن غاز أو راسب أو تغير لون غير متوقع',['تغير الشكل','تغير الحجم فقط','تغير الحالة فقط'],'تدل على تكوين مواد جديدة.'),
+M('طهي البيض تغير','كيميائي',['فيزيائي','حالة','لا تغير'],'تتغير بنية البروتين نهائياً.'),
+M('كسر الزجاج تغير','فيزيائي',['كيميائي','احتراق','تحلل'],'تتغير الأبعاد فقط.'),
+M('تحلل الماء بالتيار الكهربائي إلى هيدروجين وأكسجين تغير','كيميائي',['فيزيائي','تسامي','انصهار'],'تتكون مادتان جديدتان.'),
+M('إذابة ملح الطعام في الماء ثم تبخير الماء وعودة الملح تغير','فيزيائي',['كيميائي','نووي','احتراق'],'يعود الملح بالخواص نفسها.'),
+M('تحول الحليب إلى لبن (تخمر) تغير','كيميائي',['فيزيائي','تسامي','انصهار'],'تتكون مواد جديدة.'),
+M('سحق قطعة طباشير إلى مسحوق تغير','فيزيائي',['كيميائي','احتراق','صدأ'],'الصيغة لم تتغير.'),
+M('من الخواص الفيزيائية','الذوبانية والتوصيل الكهربائي',['الاشتعال والصدأ','التفاعل مع الأحماض والأكسدة','السمية فقط'],'تقاس دون تغيير التركيب.'),
+M('الخاصية التي تصف قدرة الفلز على التحول إلى صفائح','الطرق (قابلية الطرق)',['قابلية الاشتعال','السمية','التأكسد'],'خاصية فيزيائية.'),
+M('تلون الفضة (تكدّرها) في الهواء يدل على خاصية','كيميائية',['فيزيائية','حالة','كثافة'],'تفاعل مع مركبات الكبريت.'),
+M('تتغير الخواص الكيميائية للمادة عندما','تتحول إلى مادة جديدة',['تتغير حالتها','يتغير حجمها','تتغير درجة حرارتها فقط'],'التركيب يتغير.'),
+M('انطلاق فقاعات غاز عند إضافة قرص فوار للماء يدل على','تغير كيميائي',['تغير فيزيائي','تبخر','انصهار'],'تكوّن غاز CO₂.'),
+M('درجة الانصهار خاصية','فيزيائية مميزة',['كيميائية','غير مميزة','لا علاقة لها بالمادة'],'ثابتة للمادة النقية.'),
+M('تكوّن الراسب عند خلط محلولين يدل على','تفاعل كيميائي',['تغير فيزيائي','تبخر','تكاثف'],'نواتج جديدة غير ذائبة.'),
+M('أي مما يأتي ليس دليلاً على تغير كيميائي؟','تغير الحجم عند تبريد الماء',['ظهور رائحة جديدة','انطلاق ضوء وحرارة','تكوّن راسب'],'تغير فيزيائي.'),
+M('تفاعل الصوديوم مع الماء بعنف خاصية','كيميائية',['فيزيائية','مميزة فيزيائياً','حالة'],'ينتج هيدروكسيد وهيدروجين.')
+];
+/* ===== 4 أنواع التفاعلات ===== */
+D.s4=[
+M('2Na + Cl₂ → 2NaCl تفاعل','اتحاد (تكوين)',['تحلل','إحلال بسيط','إحلال مزدوج'],'مادتان تتحدان لتكوين مركب.'),
+M('2H₂O → 2H₂ + O₂ تفاعل','تحلل',['اتحاد','احتراق','إحلال مزدوج'],'مركب واحد يتفكك إلى مواد أبسط.'),
+M('CH₄ + 2O₂ → CO₂ + 2H₂O تفاعل','احتراق',['تحلل','إحلال بسيط','اتحاد فقط'],'مادة تتفاعل مع الأكسجين وتنتج طاقة.'),
+M('Zn + 2HCl → ZnCl₂ + H₂ تفاعل','إحلال بسيط',['إحلال مزدوج','اتحاد','تحلل'],'عنصر يحل محل عنصر في مركب.'),
+M('NaCl + AgNO₃ → AgCl + NaNO₃ تفاعل','إحلال مزدوج',['إحلال بسيط','تحلل','احتراق'],'تبادل أيونات بين مركبين.'),
+M('الصيغة العامة لتفاعل الاتحاد','A + B → AB',['AB → A + B','A + BX → AX + B','AX + BY → AY + BX'],'مواد بسيطة تكوّن مركباً.'),
+M('الصيغة العامة لتفاعل التحلل','AB → A + B',['A + B → AB','A + BX → AX + B','AX + BY → AY + BX'],'مركب يتفكك.'),
+M('الصيغة العامة للإحلال البسيط','A + BX → AX + B',['A + B → AB','AX + BY → AY + BX','AB → A + B'],'عنصر أنشط يطرد الأقل نشاطاً.'),
+M('الصيغة العامة للإحلال المزدوج','AX + BY → AY + BX',['A + BX → AX + B','AB → A + B','A + B → AB'],'تبادل الأيونات.'),
+M('CaCO₃ → CaO + CO₂ تفاعل','تحلل',['اتحاد','إحلال مزدوج','إحلال بسيط'],'مركب واحد يعطي مادتين.'),
+M('N₂ + 3H₂ → 2NH₃ تفاعل','اتحاد',['تحلل','إحلال بسيط','إحلال مزدوج'],'تكوين الأمونيا من عنصريها.'),
+M('Fe + CuSO₄ → FeSO₄ + Cu تفاعل','إحلال بسيط',['إحلال مزدوج','اتحاد','تحلل'],'الحديد أنشط من النحاس.'),
+M('أي الفلزات الآتية أنشط؟','Mg',['Cu','Ag','Au'],'ترتيبها: Mg أنشط من Cu وAg وAu.'),
+M('يحل الفلز الأنشط محل الفلز الأقل نشاطاً في','محلول مركّبه',['الحالة الصلبة فقط','أي ظرف','لا يحل أبداً'],'شرط الإحلال البسيط.'),
+M('Cu + ZnSO₄ →','لا يحدث تفاعل',['CuSO₄ + Zn','Zn + Cu','CuZn'],'النحاس أقل نشاطاً من الزنك.'),
+M('Cl₂ + 2KBr → 2KCl + Br₂ يحدث لأن','الكلور أنشط من البروم',['البروم أنشط من الكلور','البوتاسيوم لافلز','لا يحدث'],'اللافلز الأنشط يحل محل الأقل نشاطاً.'),
+M('ينتج عن تفاعل الإحلال المزدوج غالباً','راسب أو غاز أو ماء',['فلز نقي فقط','طاقة نووية','عنصر فقط'],'دافع حدوث التفاعل.'),
+M('تفاعل الفلز النشط مع الماء أو الحمض ينتج غالباً','غاز الهيدروجين',['غاز الأكسجين','غاز النيتروجين','ثاني أكسيد الكربون'],'مثل Zn مع HCl.'),
+M('احتراق الهيدروكربونات في وفرة الأكسجين ينتج','CO₂ و H₂O',['CO فقط','C فقط','H₂ و O₂'],'احتراق تام.'),
+M('2KClO₃ → 2KCl + 3O₂ تفاعل','تحلل',['اتحاد','إحلال بسيط','احتراق'],'مركب يعطي مركباً وعنصراً.'),
+M('2Mg + O₂ → 2MgO يمكن اعتباره','اتحاد واحتراق',['تحلل','إحلال مزدوج','إحلال بسيط'],'فلز يتحد مع الأكسجين ويطلق ضوءاً.'),
+M('BaCl₂ + Na₂SO₄ → BaSO₄ + 2NaCl تفاعل','إحلال مزدوج ويتكون راسب',['إحلال بسيط','تحلل','اتحاد'],'يترسب BaSO₄.'),
+M('أي التفاعلات الآتية يُصنف تحللاً؟','2HgO → 2Hg + O₂',['2H₂ + O₂ → 2H₂O','Fe + CuSO₄ → FeSO₄ + Cu','AgNO₃ + NaCl → AgCl + NaNO₃'],'مركب واحد → مواد أبسط.'),
+M('الفلز الأقل نشاطاً بين الآتية','Au',['Na','Fe','Zn'],'الذهب من أقل الفلزات نشاطاً.'),
+M('تفاعل الاحتراق يُنتج عادة','طاقة حرارية وضوءاً',['طاقة نووية','برودة','لا طاقة'],'تفاعل طارد للحرارة.'),
+M('Br₂ + 2KCl → لا يتفاعل لأن','البروم أقل نشاطاً من الكلور',['البروم أنشط','البوتاسيوم لافلز','الكلور غاز نبيل'],'لا يحل الأقل نشاطاً محل الأنشط.')
+];
+/* ===== 5 قانون حفظ الكتلة وموازنة المعادلات ===== */
+D.s5=[
+M('ينص قانون حفظ الكتلة على أن','الكتلة لا تفنى ولا تُستحدث في التفاعل الكيميائي',['الكتلة تزداد دائماً','الكتلة تقل دائماً','الطاقة فقط تُحفظ'],'قانون لافوازييه.'),
+M('مجموع كتل المتفاعلات يساوي','مجموع كتل النواتج',['كتلة أحد النواتج','صفراً','ضعف كتلة النواتج'],'في نظام مغلق.'),
+M('العالم الذي نسب إليه قانون حفظ الكتلة','لافوازييه',['دالتون','مندليف','بور'],'القرن الثامن عشر.'),
+M('تفاعل 10 g من مادة مع 20 g من مادة أخرى ينتج كتلة','30 g',['10 g','20 g','200 g'],'10 + 20 = 30 g.'),
+M('تحللت 50 g من مادة فتكونت مادتان كتلة إحداهما 30 g. كتلة الأخرى','20 g',['80 g','30 g','50 g'],'50 − 30 = 20 g.'),
+M('عدد ذرات كل عنصر في المتفاعلات يساوي عددها في النواتج، لذلك يجب أن تكون المعادلة','موزونة',['غير موزونة','ملونة','طاردة للحرارة فقط'],'الذرات لا تفنى.'),
+M('الأرقام الكبيرة أمام الصيغ في المعادلة تسمى','معاملات',['أرقاماً سفلية','أعداداً ذرية','رموزاً'],'تضرب ما بعدها.'),
+M('عند موازنة المعادلة يمكن تغيير','المعاملات فقط',['الأرقام السفلية في الصيغ','رموز العناصر','صيغ النواتج'],'تغيير الأرقام السفلية يغير المادة.'),
+M('معاملات موازنة H₂ + O₂ → H₂O بالترتيب','2 ، 1 ، 2',['1 ، 1 ، 1','2 ، 2 ، 1','1 ، 2 ، 2'],'2H₂ + O₂ → 2H₂O.'),
+M('معاملات N₂ + H₂ → NH₃ بالترتيب','1 ، 3 ، 2',['1 ، 1 ، 1','2 ، 3 ، 1','1 ، 2 ، 3'],'N₂ + 3H₂ → 2NH₃.'),
+M('معاملات CH₄ + O₂ → CO₂ + H₂O بالترتيب','1 ، 2 ، 1 ، 2',['1 ، 1 ، 1 ، 1','2 ، 1 ، 1 ، 2','1 ، 3 ، 1 ، 2'],'CH₄ + 2O₂ → CO₂ + 2H₂O.'),
+M('معاملات Fe + O₂ → Fe₂O₃ بالترتيب','4 ، 3 ، 2',['2 ، 3 ، 1','1 ، 1 ، 1','3 ، 2 ، 4'],'4Fe + 3O₂ → 2Fe₂O₃.'),
+M('معاملات Al + Cl₂ → AlCl₃ بالترتيب','2 ، 3 ، 2',['1 ، 1 ، 1','2 ، 2 ، 3','3 ، 2 ، 2'],'2Al + 3Cl₂ → 2AlCl₃.'),
+M('معاملات C₃H₈ + O₂ → CO₂ + H₂O بالترتيب','1 ، 5 ، 3 ، 4',['1 ، 3 ، 5 ، 4','2 ، 5 ، 3 ، 4','1 ، 5 ، 4 ، 3'],'C₃H₈ + 5O₂ → 3CO₂ + 4H₂O.'),
+M('عدد ذرات الهيدروجين في 2H₂O','4',['2','1','3'],'2 × 2 = 4.'),
+M('عدد ذرات الأكسجين في 3Ca(OH)₂','6',['3','2','9'],'3 × 2 = 6.'),
+M('مجموع معاملات المعادلة الموزونة 2H₂ + O₂ → 2H₂O','5',['3','4','6'],'2 + 1 + 2 = 5.'),
+M('عدد الذرات الكلي في 2H₂SO₄','14',['7','12','16'],'7 ذرات في الجزيء × 2.'),
+M('معاملات Mg + HCl → MgCl₂ + H₂ بالترتيب','1 ، 2 ، 1 ، 1',['1 ، 1 ، 1 ، 1','2 ، 1 ، 1 ، 2','1 ، 2 ، 2 ، 1'],'Mg + 2HCl → MgCl₂ + H₂.'),
+M('معاملات KClO₃ → KCl + O₂ بالترتيب','2 ، 2 ، 3',['1 ، 1 ، 1','2 ، 1 ، 3','1 ، 2 ، 3'],'2KClO₃ → 2KCl + 3O₂.'),
+M('معاملات Na + H₂O → NaOH + H₂ بالترتيب','2 ، 2 ، 2 ، 1',['1 ، 1 ، 1 ، 1','2 ، 1 ، 2 ، 1','1 ، 2 ، 2 ، 1'],'2Na + 2H₂O → 2NaOH + H₂.'),
+M('في المعادلة الكيميائية يُكتب الرمز (aq) للدلالة على','محلول مائي',['غاز','صلب','سائل'],'aq = aqueous.'),
+M('يشير الرمز (s) إلى','الحالة الصلبة',['السائلة','الغازية','المحلول'],'solid.'),
+M('يشير السهم → في المعادلة إلى','ينتج / يتحول إلى',['يساوي','يزيد','يطرح'],'اتجاه التفاعل.'),
+M('احتُرق 12 g من المغنيسيوم مع أكسجين فتكوّن 20 g من أكسيد المغنيسيوم. كتلة الأكسجين المتفاعل','8 g',['32 g','12 g','20 g'],'20 − 12 = 8 g.'),
+M('المعادلة الكيميائية الموزونة تحقق قانون','حفظ الكتلة',['الجذب العام','أوم','بويل فقط'],'تساوي أعداد الذرات.'),
+M('تفاعل كتلة المتفاعلات فيه 45 g. كتلة النواتج (نظام مغلق)','45 g',['0 g','90 g','22.5 g'],'تُحفظ الكتلة.')
+];
+/* ===== 6 أسئلة متنوعة ===== */
+D.s6=[
+M('المادة التي تتكون من نوع واحد من الذرات','عنصر',['مركب','مخلوط','محلول'],'مثل الحديد والأكسجين.'),
+M('المادة التي تتكون من اتحاد عنصرين أو أكثر كيميائياً بنسب ثابتة','مركب',['عنصر','مخلوط','معلق'],'مثل H₂O.'),
+M('المخلوط المتجانس يسمى أيضاً','محلولاً',['معلقاً','غروياً','مركباً'],'مكوناته لا تُميز بالعين.'),
+M('أي مما يأتي مخلوط غير متجانس؟','ماء وزيت',['ماء وملح ذائب','الهواء النقي','سبيكة ذهب مذاب'],'مكوناته تُرى منفصلة.'),
+M('تُفصل مخلوطات سائل في سائل مختلفي الغليان بـ','التقطير',['الترشيح','التبلور','المغناطيس'],'اختلاف درجة الغليان.'),
+M('يُفصل الرمل عن الماء بـ','الترشيح',['التقطير','التبلور','التسامي'],'يحجز الورق الصلب.'),
+M('رمز عنصر الصوديوم','Na',['S','So','N'],'من natrium.'),
+M('رمز عنصر البوتاسيوم','K',['P','Po','B'],'من kalium.'),
+M('رمز عنصر الحديد','Fe',['H','I','Ir'],'من ferrum.'),
+M('رمز عنصر الذهب','Au',['Ag','G','Go'],'من aurum.'),
+M('الصيغة الكيميائية لملح الطعام','NaCl',['KCl','NaOH','Na₂O'],'كلوريد الصوديوم.'),
+M('الصيغة الكيميائية لثاني أكسيد الكربون','CO₂',['CO','C₂O','O₂C₂'],'ذرة كربون وذرتا أكسجين.'),
+M('الذرة هي','أصغر وحدة بناء للعنصر تحتفظ بخواصه',['جزيء الماء','مخلوط','مركب'],'تتكون من نواة وإلكترونات.'),
+M('تقاس الكتلة بوحدة','kg',['N','J','W'],'الوحدة الأساسية.'),
+M('تقاس كثافة المادة بوحدة','g/cm³',['g·cm','cm³/g','kg·m'],'كتلة ÷ حجم.'),
+M('كثافة جسم كتلته 20 g وحجمه 5 cm³','4 g/cm³',['100 g/cm³','0.25 g/cm³','15 g/cm³'],'20 ÷ 5 = 4.'),
+M('جسم كثافته أكبر من كثافة الماء (1 g/cm³) فإنه','يغوص فيه',['يطفو','يتبخر','يذوب دائماً'],'الأكثف يغوص.'),
+M('الحالة الفيزيائية للزئبق عند درجة حرارة الغرفة','سائل',['صلب','غاز','بلازما'],'فلز سائل.'),
+M('تفيد سلسلة نشاط الفلزات في','التنبؤ بحدوث الإحلال البسيط',['حساب الكثافة','قياس الكتلة','فصل المخاليط'],'ترتب الفلزات حسب نشاطها.'),
+M('انصهار الشمع تغير','فيزيائي',['كيميائي','نووي','احتراق'],'تغير حالة.'),
+M('احتراق الشمعة يتضمن','تغيراً فيزيائياً وكيميائياً',['فيزيائياً فقط','كيميائياً فقط','لا تغير'],'انصهار الشمع فيزيائي واحتراق الفتيل كيميائي.'),
+M('أي الغازات الآتية يدعم الاشتعال؟','الأكسجين',['النيتروجين','الأرجون','الهيليوم'],'الأكسجين مؤكسد.'),
+M('تكوّن الندى صباحاً','تكاثف',['تبخر','تسامي','انصهار'],'بخار → سائل.'),
+M('الغاز المسؤول عن تآكل الأوزون من مكيفات قديمة','CFCs',['CO₂','N₂','O₂'],'كلوروفلوروكربون.'),
+M('أي المواد الآتية مركب؟','الماء',['الأكسجين','الحديد','الهيدروجين'],'H₂O.'),
+M('إضافة السكر للشاي وتحريكه','تكوين مخلوط متجانس',['تفاعل كيميائي','تكوين مركب','تحلل'],'مخلوط (محلول).')
+];
+const NAMES5={s1:'فروع الكيمياء وغاز الأوزون',s2:'المادة وحالاتها',s3:'الخصائص والتغيرات الفيزيائية والكيميائية',s4:'أنواع التفاعلات الكيميائية',s5:'قانون حفظ الكتلة وموازنة المعادلات الكيميائية',s6:'أسئلة متنوعة'};
+const SHORT5={s1:'فروع الكيمياء والأوزون',s2:'المادة وحالاتها',s3:'الخواص والتغيرات',s4:'أنواع التفاعلات',s5:'حفظ الكتلة والموازنة',s6:'أسئلة متنوعة'};
+const COL5={s1:'#0e7c86',s2:'#c2410c',s3:'#7c3aed',s4:'#15803d',s5:'#be185d',s6:'#0369a1'};
+const SUM5={
+s1:['الكيمياء علم المادة وتركيبها وخواصها وتغيراتها والطاقة المصاحبة.','الفروع: التحليلية (مكونات المادة وكمياتها)، العضوية (مركبات الكربون)، غير العضوية (الفلزات والأملاح)، الفيزيائية (الطاقة وسرعة التفاعل)، الحيوية (كيمياء الكائنات الحية).','الأوزون O₃ يوجد في الستراتوسفير ويمتص الأشعة فوق البنفسجية، ويقاس بوحدة دوبسون (الطبيعي ≈ 300 DU والثقب أقل من 220 DU).','مركبات CFCs تحرر ذرات كلور تدمر الأوزون، والحد منها بموجب بروتوكول مونتريال.'],
+s2:['المادة كل ما له كتلة ويشغل حيزاً، والكتلة مقياس لكمية المادة.','الحالات: صلبة (شكل وحجم ثابتان)، سائلة (حجم ثابت وشكل الوعاء)، غازية (لا شكل ولا حجم ثابتان)، والبلازما غاز متأين.','التحولات: انصهار، تجمد، تبخر، تكاثف، تسامي (صلب→غاز)، ترسب (غاز→صلب).','الانصهار والتبخر والتسامي تمتص طاقة؛ والتجمد والتكاثف والترسب تطلق طاقة.'],
+s3:['الخواص الفيزيائية تُلاحظ دون تغيير تركيب المادة: اللون، الكثافة، درجتا الغليان والانصهار، الذوبانية.','الخواص الكيميائية تظهر عند التفاعل: قابلية الاشتعال، الصدأ، التفاعل مع الأحماض.','التغير الفيزيائي لا ينتج مادة جديدة (تغير الشكل أو الحالة)، والكيميائي ينتج مواد جديدة.','دلائل التغير الكيميائي: تكوّن غاز أو راسب، تغير لون، حرارة أو ضوء، رائحة جديدة.'],
+s4:['الاتحاد: A + B → AB. التحلل: AB → A + B.','الإحلال البسيط: A + BX → AX + B، ويحدث إذا كان A أنشط من B (سلسلة النشاط).','الإحلال المزدوج: AX + BY → AY + BX، وينتج راسباً أو غازاً أو ماءً.','الاحتراق: تفاعل مادة مع الأكسجين مع إطلاق طاقة حرارية وضوء.'],
+s5:['قانون حفظ الكتلة (لافوازييه): مجموع كتل المتفاعلات = مجموع كتل النواتج.','لذلك يجب أن يتساوى عدد ذرات كل عنصر في طرفي المعادلة (موازنتها).','نوازن بتغيير المعاملات فقط، ولا نغيّر الأرقام السفلية في الصيغ.','العدد الكلي للذرات = المعامل × عدد الذرات في الصيغة.'],
+s6:['العنصر نوع واحد من الذرات، والمركب عناصر متحدة كيميائياً بنسب ثابتة، والمخلوط مواد غير متحدة كيميائياً.','المخاليط: متجانس (محلول) وغير متجانس؛ تُفصل بالترشيح والتقطير والتبلور.','رموز شائعة: Na، K، Fe، Cu، Ag، Au، Pb، Hg.','الكثافة = الكتلة ÷ الحجم.']};
+const K5=['s1','s2','s3','s4','s5','s6'];
+const SECTIONS=[];
+K5.forEach((k,i)=>SECTIONS.push({id:k,n:i+1,title:NAMES5[k],short:SHORT5[k],color:COL5[k],sum:SUM5[k],
+  train:D[k].slice(0,20),quiz:[...D[k].slice(20,26),...D[k].slice(0,4)]}));
+SECTIONS.push({id:'s7',n:7,title:'القسم الشامل (60 سؤالاً)',short:'القسم الشامل',color:'#1d4ed8',
+  sum:['يجمع هذا القسم 60 سؤالاً من الأقسام الستة (10 من كل قسم) لمراجعة شاملة قبل الاختبار النهائي.'],
+  train:K5.flatMap(k=>D[k].slice(10,20)),quiz:[]});
+SECTIONS.push({id:'final',n:8,title:'الاختبار النهائي (نمط التحصيلي)',short:'الاختبار النهائي',color:'#b91c1c',sum:[],
+  train:[...K5.flatMap(k=>D[k].slice(6,14)),D.s1[20],D.s2[20]],quiz:[]});
+
+</script>
+<script>
+"use strict";
+/* ============ إعدادات المنصة ============ */
+const EMAIL='momran1985@gmail.com';          // بريد المعلم لاستقبال النتائج — يمكن تغييره من هنا
+const TEACHER_PHONE='0563264267';
+const TEACHER='أ. محمد عمران';
+const TEACHER_TITLE='مدرب التحصيلي';
+const SCHOOL='مدارس الأنجال الأهلية بالأحساء';
+const PLATFORM='منصة اختبارات تحصيلي — الكيمياء (المادة والتفاعلات)';
+const STORE='tahsili_chemistry_platform_v1';
+const QUIZ_SECS=600, FINAL_SECS=3600;
+const LET=['أ','ب','ج','د'];
+
+/* ============ أدوات ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const RX=/[−\-]?(?:[A-Za-z0-9Δπθμₓ√²³°%₀₁₂⁰¹⁴⁵⁶⁷⁸⁹(][A-Za-z0-9Δπθμₓ√−\-+=×÷·.,()\/\^²³°%_̄₀₁₂⁰¹⁴⁵⁶⁷⁸⁹ ]*[A-Za-z0-9Δπθμₓ²³°%)̄₀₁₂⁰¹⁴⁵⁶⁷⁸⁹]|[A-Za-z0-9Δπθμₓ])/g;
+function fx(s){let out='',last=0,m;RX.lastIndex=0;s=String(s);
+  while((m=RX.exec(s))){out+=esc(s.slice(last,m.index))+'<bdi dir="ltr">'+esc(m[0])+'</bdi>';last=m.index+m[0].length}
+  return out+esc(s.slice(last))}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const mmss=s=>{s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+const toEn=s=>String(s).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+const dateAr=d=>new Date(d).toLocaleString('ar-SA',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),2400)}
+
+/* ============ التخزين (المتصفح) ============ */
+let mem=null;
+function load(){try{const r=localStorage.getItem(STORE);if(r)return JSON.parse(r)}catch(e){}return mem||{cur:null,users:{}}}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(db))}catch(e){mem=db}}
+let db=load();
+const user=()=>db.cur&&db.users[db.cur];
+
+/* ============ الرسوم البيانية ============ */
+function niceStep(r){const p=Math.pow(10,Math.floor(Math.log10(r/5)));for(const m of [1,2,2.5,5,10]){if(r/(m*p)<=6)return m*p}return 10*p}
+const nf=v=>String(Number(v.toFixed(2)));
+function drawGraph(g){
+  const W=360,H=232,ml=52,mr=20,mt=16,mb=46,cols=['#0e7c86','#e8590c'];
+  const xs=[],ys=[];g.L.forEach(l=>l.p.forEach(([x,y])=>{xs.push(x);ys.push(y)}));
+  let xmax=Math.max(...xs),ymax=Math.max(...ys,0),ymin=Math.min(...ys,0);
+  const sx=niceStep(xmax),sy=niceStep((ymax-ymin)||1);
+  xmax=Math.ceil(xmax/sx-1e-9)*sx;ymax=Math.ceil(ymax/sy-1e-9)*sy;ymin=Math.floor(ymin/sy+1e-9)*sy;
+  const X=x=>ml+x/xmax*(W-ml-mr),Y=y=>mt+(ymax-y)/(ymax-ymin)*(H-mt-mb);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="رسم بياني">`;
+  for(let x=0;x<=xmax+1e-9;x+=sx){s+=`<line x1="${X(x)}" y1="${mt}" x2="${X(x)}" y2="${H-mb}" stroke="#e5dfca" stroke-width="1"/><text x="${X(x)}" y="${H-mb+15}" font-size="11" text-anchor="middle" fill="#34476b">${nf(x)}</text>`}
+  for(let y=ymin;y<=ymax+1e-9;y+=sy){s+=`<line x1="${ml}" y1="${Y(y)}" x2="${W-mr}" y2="${Y(y)}" stroke="#e5dfca" stroke-width="1"/><text x="${ml-6}" y="${Y(y)+4}" font-size="11" text-anchor="end" fill="#34476b">${nf(y)}</text>`}
+  s+=`<line x1="${ml}" y1="${Y(0)}" x2="${W-mr}" y2="${Y(0)}" stroke="#10264a" stroke-width="1.8"/><line x1="${ml}" y1="${mt}" x2="${ml}" y2="${H-mb}" stroke="#10264a" stroke-width="1.8"/>`;
+  const xl=g.xl||'الزمن (s)',yl=g.yl||'';
+  s+=`<text x="${(ml+W-mr)/2}" y="${H-6}" font-size="12" font-weight="700" text-anchor="middle" fill="#10264a">${xl}</text>`;
+  s+=`<text transform="translate(13 ${(mt+H-mb)/2}) rotate(-90)" font-size="12" font-weight="700" text-anchor="middle" fill="#10264a">${yl}</text>`;
+  g.L.forEach((l,i)=>{const c=cols[i%2];
+    s+=`<polyline fill="none" stroke="${c}" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" points="${l.p.map(([x,y])=>X(x)+','+Y(y)).join(' ')}"/>`;
+    if(l.p.length<=4)l.p.forEach(([x,y])=>{s+=`<circle cx="${X(x)}" cy="${Y(y)}" r="3.2" fill="${c}"/>`});
+    if(l.n){const [x,y]=l.p[l.p.length-1];s+=`<text x="${X(x)-6}" y="${Y(y)-7}" font-size="14" font-weight="800" fill="${c}" text-anchor="end">${l.n}</text>`}
+  });
+  return s+'</svg>'}
+
+/* ============ الجلسة ============ */
+let S=null,tick=null;
+const SEC=id=>SECTIONS.find(s=>s.id===id);
+function bank(secId,mode){
+  const sec=SEC(secId);
+  if(mode==='train'||mode==='final')return sec.train;
+  if(secId==='s7')return shuffle(['s1','s2','s3','s4','s5','s6'].flatMap(i=>SEC(i).quiz)).slice(0,10);
+  return sec.quiz;}
+function build(secId,mode,random){
+  let b=bank(secId,mode);if(random)b=shuffle(b);
+  return b.map(q=>{const idx=shuffle([0,1,2,3]);return{q:q.q,g:q.g,e:q.e,o:idx.map(i=>q.o[i]),c:idx.indexOf(0)}})}
+function start(secId,mode,random){
+  clearInterval(tick);
+  const sec=SEC(secId);
+  S={sec,mode,qs:build(secId,mode,random),i:0,ans:[],pts:[],t0:Date.now(),qs0:Date.now(),
+     limit:mode==='quiz'?QUIZ_SECS:mode==='final'?FINAL_SECS:0,done:false};
+  if(S.limit){tick=setInterval(onTick,1000)}
+  renderQ(true);window.scrollTo(0,0)}
+function onTick(){
+  if(!S||S.done){clearInterval(tick);return}
+  const left=S.limit-(Date.now()-S.t0)/1000,e=$('#timer');
+  if(e){e.textContent=mmss(left);e.classList.toggle('low',left<=60)}
+  if(left<=0){toast('انتهى الوقت — تم تسليم الاختبار');finish()}}
+
+/* ============ شاشة الدخول ============ */
+function viewLogin(){
+  $('#app').innerHTML=`
+  <div class="login">
+    <div class="hero">
+      <span class="tag">${TEACHER_TITLE} · ${TEACHER}</span>
+      <h1>منصة اختبارات <span>التحصيلي</span><br>الكيمياء — المادة والتفاعلات</h1>
+      <p>تدرّب على أسئلة فروع الكيمياء والأوزون، المادة وحالاتها، الخواص والتغيرات، أنواع التفاعلات، وحفظ الكتلة وموازنة المعادلات وفق المنهج السعودي، مع تصحيح فوري وتفسير لكل سؤال، ثم اختبر نفسك واحصل على شهادة إنجاز.</p>
+      <svg viewBox="0 0 360 170" aria-hidden="true">
+        <path d="M20 10V150H345" fill="none" stroke="#10264a" stroke-opacity=".35" stroke-width="1.5"/>
+        <path class="trace" d="M20 150 C 90 150, 120 140, 170 100 S 260 20, 330 20" fill="none" stroke="#e8590c" stroke-width="4" stroke-linecap="round"/>
+        <circle class="dot" r="7" fill="#10264a"/>
+        <text x="332" y="164" font-size="11" fill="#34476b" text-anchor="end">t</text><text x="8" y="16" font-size="11" fill="#34476b">x</text>
+      </svg>
+    </div>
+    <form class="card form" id="lf" autocomplete="off">
+      <h2>تسجيل الدخول</h2>
+      <p class="hint">تُحفظ بياناتك ونتائجك في هذا المتصفح فقط.</p>
+      <label for="nm">الاسم الثلاثي</label>
+      <input type="text" id="nm" placeholder="مثال: أحمد محمد العلي" required>
+      <label for="ph">رقم الجوال</label>
+      <input type="tel" id="ph" inputmode="numeric" placeholder="05xxxxxxxx" maxlength="10" required>
+      <div class="err" id="er"></div>
+      <button class="btn" style="width:100%;margin-top:6px" type="submit">دخول المنصة</button>
+      <p class="hint" style="margin-top:12px">للتواصل مع المعلم: <a href="tel:${TEACHER_PHONE}" style="color:var(--teal);font-weight:700"><bdi dir="ltr">${TEACHER_PHONE}</bdi></a></p>
+    </form>
+  </div>`;
+  $('#lf').onsubmit=ev=>{ev.preventDefault();
+    const name=$('#nm').value.trim().replace(/\s+/g,' '),ph=toEn($('#ph').value).replace(/\D/g,'');
+    const er=$('#er');
+    if(name.split(' ').length<3){er.textContent='يرجى كتابة الاسم الثلاثي (ثلاث كلمات على الأقل).';return}
+    if(!/^05\d{8}$/.test(ph)){er.textContent='رقم الجوال غير صحيح، اكتبه بصيغة 05xxxxxxxx (10 أرقام).';return}
+    const u=db.users[ph]||(db.users[ph]={phone:ph,results:[]});u.name=name;db.cur=ph;save();viewHome()}}
+
+/* ============ الصفحة الرئيسية ============ */
+function bestOf(u,secId,mode){const r=u.results.filter(x=>x.sec===secId&&x.mode===mode);return r.length?Math.max(...r.map(x=>x.pct)):null}
+function medalSvg(sz=22){return`<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2l3 6h4l3-6" fill="none" stroke="#c0392b" stroke-width="2"/><circle cx="12" cy="15" r="6.5" fill="#f5b81c" stroke="#b97800" stroke-width="1.5"/><path d="M12 11.5l1.1 2.3 2.5.3-1.8 1.7.5 2.5-2.3-1.3-2.3 1.3.5-2.5-1.8-1.7 2.5-.3z" fill="#fff6dd"/></svg>`}
+function pillFor(u,id,mode,label){const b=bestOf(u,id,mode);
+  return b===null?`<span class="pill">${label}: لم يُجرَ</span>`:`<span class="pill ${b>=80?'good':''}">${label}: ${b}%${b>=80?' · وسام':''}</span>`}
+function viewHome(){
+  clearInterval(tick);S=null;const u=user();if(!u)return viewLogin();
+  const R=u.results,pts=R.reduce((a,r)=>a+r.pts,0),avg=R.length?Math.round(R.reduce((a,r)=>a+r.pct,0)/R.length):0;
+  const medals=SECTIONS.reduce((a,s)=>a+(['train','quiz','final'].some(m=>{const b=bestOf(u,s.id,m);return b!==null&&b>=80})?1:0),0);
+  const card=s=>{
+    const tl=s.train.length,hasQ=s.id!=='final';
+    if(s.id==='final')return'';
+    return`<div class="card scard" style="--c:${s.color}">
+      <div class="num">${s.n}</div>
+      <h3>${s.n===7?esc(s.title):'القسم '+['','الأول','الثاني','الثالث','الرابع','الخامس','السادس'][s.n]+': '+esc(s.title)}</h3>
+      <div class="meta">${tl} سؤالاً تدريبياً · اختبار قسم من 10 أسئلة</div>${s.sum&&s.sum.length?`<details class="sum"><summary>شرح مختصر للقسم</summary><ul>${s.sum.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`:''}
+      <div class="best">${pillFor(u,s.id,'train','التدريب')}${pillFor(u,s.id,'quiz','الاختبار')}</div>
+      <div class="row"><button class="btn sm" data-a="open" data-s="${s.id}" data-m="train">ابدأ التدريب</button>
+      <button class="btn sm amber" data-a="open" data-s="${s.id}" data-m="quiz">اختبار القسم</button></div></div>`};
+  const f=SEC('final');
+  $('#app').innerHTML=`
+  <div class="top"><div class="brand">${logo()}<div><b>${PLATFORM}</b><small>إعداد ${TEACHER_TITLE} ${TEACHER} — ${SCHOOL}</small></div></div>
+    <span class="chip">${esc(u.name)}</span><button class="btn sm sec" data-a="logout">خروج</button></div>
+  <div class="stats">
+    <div class="card stat"><b>${R.length}</b><span>محاولة منجزة</span></div>
+    <div class="card stat"><b>${avg}%</b><span>متوسط النتائج</span></div>
+    <div class="card stat"><b>${pts}</b><span>مجموع النقاط</span></div>
+    <div class="card stat"><b>${medals}</b><span>أوسمة (80% فأكثر)</span></div>
+  </div>
+  <div class="grid">${SECTIONS.map(card).join('')}</div>
+  <div class="card final">
+    <div class="grow"><h3>الاختبار النهائي — نمط التحصيلي</h3><p>${f.train.length} سؤالاً من الأقسام جميعها · زمن الاختبار 60 دقيقة · التصحيح بعد التسليم</p>
+    <div class="best" style="margin:8px 0 0">${pillFor(u,'final','final','أفضل نتيجة')}</div></div>
+    <button class="btn amber" data-a="open" data-s="final" data-m="final">ابدأ الاختبار النهائي</button></div>
+  <div class="foot"><button class="btn sec sm" data-a="report">إرسال التقرير العام للمعلم</button>
+    <button class="btn sec sm" data-a="reset">مسح نتائجي</button></div>
+  <div class="credit">للتواصل مع المعلم: <a href="tel:${TEACHER_PHONE}"><bdi dir="ltr">${TEACHER_PHONE}</bdi></a> · ${TEACHER_TITLE} ${TEACHER}</div>`}
+function logo(){return`<svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#f59e0b"/><path d="M7 32C14 32 17 29 21 22S28 8 34 8" fill="none" stroke="#10264a" stroke-width="3.2" stroke-linecap="round"/><circle cx="34" cy="8" r="3.4" fill="#10264a"/></svg>`}
+
+/* نافذة بدء الاختبار */
+function openStart(secId,mode){
+  const s=SEC(secId),n=mode==='train'?s.train.length:mode==='final'?s.train.length:10;
+  const kind=mode==='train'?'تدريب':mode==='quiz'?'اختبار القسم':'الاختبار النهائي';
+  const info=mode==='train'?['تصحيح فوري بعد كل سؤال مع تفسير','نقاط حسب سرعة الإجابة (حتى 20 نقطة للسؤال)','يمكنك التدريب مرات غير محدودة']
+    :['التصحيح والمراجعة بعد التسليم','الزمن: '+(mode==='quiz'?'10 دقائق':'60 دقيقة')+' ويُسلَّم الاختبار تلقائياً عند انتهائه','لكل إجابة صحيحة 10 نقاط · وسام عند 80% · شهادة عند 60%'];
+  const o=document.createElement('div');o.className='ov';o.id='ov';
+  o.innerHTML=`<div class="modal"><h3>${kind}: ${esc(s.short)}</h3><p style="margin:0;color:var(--ink2)">${n} سؤالاً</p>${mode==='train'&&s.sum&&s.sum.length?`<details class="sum" open><summary>شرح مختصر</summary><ul>${s.sum.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`:''}<ul>${info.map(i=>`<li>${i}</li>`).join('')}</ul>
+    <label class="chk"><input type="checkbox" id="rnd"${mode!=='train'?' checked':''}> ترتيب عشوائي للأسئلة</label>
+    <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn sec sm" data-a="closeov">إلغاء</button><button class="btn" data-a="go" data-s="${secId}" data-m="${mode}">ابدأ الآن</button></div></div>`;
+  document.body.appendChild(o)}
+
+/* ============ شاشة السؤال ============ */
+function renderQ(animate){
+  const q=S.qs[S.i],tr=S.mode==='train',n=S.qs.length,a=S.ans[S.i],answered=a!==undefined;
+  const label=S.mode==='train'?'تدريب':S.mode==='quiz'?'اختبار القسم':'الاختبار النهائي';
+  const left=S.limit?S.limit-(Date.now()-S.t0)/1000:0;
+  const opts=q.o.map((t,i)=>{let cls='opt';
+    if(tr&&answered){cls+=' lock';if(i===q.c)cls+=' ok';else if(i===a)cls+=' no'}
+    else if(!tr&&a===i)cls+=' sel';
+    return`<button class="${cls}" data-a="pick" data-i="${i}"><span class="l">${LET[i]}</span><span>${fx(t)}</span></button>`}).join('');
+  let fb='';
+  if(tr&&answered){const ok=a===q.c;fb=`<div class="fb ${ok?'ok':'no'}"><b class="h">${ok?'إجابة صحيحة ✓ +'+S.pts[S.i]+' نقطة':'إجابة غير صحيحة ✗'}</b>${ok?'':'<div>الإجابة الصحيحة: <b>'+LET[q.c]+' — '+fx(q.o[q.c])+'</b></div>'}<div>${fx(q.e)}</div></div>`}
+  let nav;
+  if(tr)nav=`<div class="nav"><button class="btn sec sm" data-a="home">الرئيسية</button><button class="btn" data-a="next" ${answered?'':'disabled'}>${S.i===n-1?'عرض النتيجة':'السؤال التالي ←'}</button></div>`;
+  else nav=`<div class="nav"><button class="btn sec" data-a="prev" ${S.i===0?'disabled':''}>→ السابق</button><button class="btn red sm" data-a="finish">إنهاء وتسليم</button><button class="btn" data-a="next" ${S.i===n-1?'disabled':''}>التالي ←</button></div>
+    <div class="dots">${S.qs.map((_,i)=>`<button class="${i===S.i?'cur':S.ans[i]!==undefined?'done':''}" data-a="go2" data-i="${i}">${i+1}</button>`).join('')}</div>`;
+  const pts=S.pts.reduce((x,y)=>x+(y||0),0);
+  $('#app').innerHTML=`
+  <div class="top"><div class="brand">${logo()}<div><b>${esc(S.sec.title)}</b><small>${label}</small></div></div>
+    <span class="chip">${esc(user().name)}</span>${S.limit?`<span class="timer${left<=60?' low':''}" id="timer">${mmss(left)}</span>`:`<span class="chip">النقاط: ${pts}</span>`}</div>
+  <div class="prog" style="--c:${S.sec.color}"><i style="width:${(S.i+(tr&&answered?1:0))/n*100}%"></i></div>
+  <div class="card qcard${animate?' in':''}" style="--c:${S.sec.color}">
+    <span class="qn">سؤال ${S.i+1} من ${n}</span>
+    <div class="qt">${fx(q.q)}</div>
+    ${q.g?`<div class="fig">${drawGraph(q.g)}</div>`:''}
+    <div class="opts">${opts}</div>${fb}${nav}</div>`;
+  if(tr&&!answered)S.qs0=Date.now()}
+
+function pick(i){
+  const q=S.qs[S.i];
+  if(S.mode==='train'){
+    if(S.ans[S.i]!==undefined)return;
+    S.ans[S.i]=i;const sec=(Date.now()-S.qs0)/1000;
+    S.pts[S.i]=i===q.c?10+Math.max(0,10-Math.floor(sec/3)):0;
+  }else S.ans[S.i]=i;
+  renderQ(false)}
+
+/* ============ إنهاء الجلسة والنتيجة ============ */
+function finish(){
+  if(!S||S.done)return;
+  S.done=true;clearInterval(tick);
+  const n=S.qs.length;let score=0;
+  S.qs.forEach((q,i)=>{if(S.ans[i]===q.c)score++});
+  const pts=S.mode==='train'?S.pts.reduce((x,y)=>x+(y||0),0):score*10;
+  const pct=Math.round(score/n*100),secs=Math.round((Date.now()-S.t0)/1000);
+  S.res={sec:S.sec.id,title:S.sec.short,mode:S.mode,score,total:n,pct,pts,secs,date:Date.now()};
+  const u=user();u.results.push(S.res);save();viewResult()}
+const kindName=m=>m==='train'?'تدريب':m==='quiz'?'اختبار قسم':'اختبار نهائي';
+function viewResult(showAll){
+  const r=S.res,C=2*Math.PI*70,col=r.pct>=80?'#15803d':r.pct>=60?'#0e7c86':r.pct>=40?'#e8590c':'#b91c1c';
+  const msg=r.pct>=90?'ممتاز! أداء رائع 🌟':r.pct>=80?'أحسنت! مستوى متميز':r.pct>=60?'جيد — واصل التدريب لتتقدم أكثر':r.pct>=40?'مقبول — راجع التفسيرات وأعد المحاولة':'تحتاج إلى مراجعة الدرس ثم إعادة المحاولة';
+  const rev=S.qs.map((q,i)=>{const a=S.ans[i],ok=a===q.c,sk=a===undefined;
+    if(!showAll&&showAll!==undefined&&ok)return'';
+    return`<div class="card rvi ${ok?'ok':'no'}"><div class="q"><span class="tag2 ${ok?'ok':sk?'sk':'no'}">${ok?'صحيحة':sk?'بلا إجابة':'خاطئة'}</span>${i+1}. ${fx(q.q)}</div>
+    ${q.g?`<div class="fig">${drawGraph(q.g)}</div>`:''}
+    <div class="ans">${sk?'لم تُجب عن هذا السؤال.':'إجابتك: <b>'+LET[a]+' — '+fx(q.o[a])+'</b>'}</div>
+    ${ok?'':'<div class="ans">الإجابة الصحيحة: <b style="color:var(--ok)">'+LET[q.c]+' — '+fx(q.o[q.c])+'</b></div>'}
+    <div class="ex">${fx(q.e)}</div></div>`}).join('');
+  $('#app').innerHTML=`
+  <div class="top"><div class="brand">${logo()}<div><b>${esc(S.sec.title)}</b><small>نتيجة ${kindName(r.mode)}</small></div></div><span class="chip">${esc(user().name)}</span></div>
+  <div class="card res">
+    <div class="ring"><svg viewBox="0 0 170 170"><circle cx="85" cy="85" r="70" fill="none" stroke="#ece7d4" stroke-width="16"/><circle cx="85" cy="85" r="70" fill="none" stroke="${col}" stroke-width="16" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-r.pct/100)}"/></svg>
+      <div class="c"><div>${r.pct}%<small>${r.score} من ${r.total}</small></div></div></div>
+    <div class="msg">${msg}</div>
+    ${r.pct>=80?`<div class="medal">${medalSvg()} وسام التميّز</div>`:''}
+    <div class="kv"><div><b>${r.score}/${r.total}</b><span>الدرجة</span></div><div><b>${r.pts}</b><span>النقاط</span></div><div><b><bdi dir="ltr">${mmss(r.secs)}</bdi></b><span>الزمن المستغرق</span></div></div>
+    <div class="actions">
+      <button class="btn amber" data-a="mail">إرسال النتيجة للمعلم</button>
+      <button class="btn sec" data-a="copy">نسخ النتيجة</button>
+      ${r.pct>=60?'<button class="btn" data-a="cert">شهادة الإنجاز</button>':''}
+      <button class="btn sec" data-a="again">إعادة المحاولة</button>
+      <button class="btn sec" data-a="home">الرئيسية</button></div>
+    ${r.pct<60?'<p class="hint" style="margin-top:10px">تُمنح شهادة الإنجاز عند تحقيق 60% فأكثر.</p>':''}
+  </div>
+  <div class="rv"><div class="qbar"><h2 class="t">مراجعة الأسئلة</h2>
+    <button class="btn sec sm" data-a="rvall">عرض الكل</button><button class="btn sec sm" data-a="rverr">الأخطاء فقط</button></div>
+    ${rev||'<div class="card" style="padding:18px;text-align:center">لا توجد أخطاء — إجاباتك كلها صحيحة 🎉</div>'}</div>`;
+  window.scrollTo(0,0)}
+
+/* ============ البريد والنسخ ============ */
+function summaryText(){
+  const u=user(),r=S.res,wrong=S.qs.map((q,i)=>S.ans[i]===q.c?null:i+1).filter(Boolean);
+  return[`نتيجة طالب — ${PLATFORM}`,`الاسم: ${u.name}`,`الجوال: ${u.phone}`,`القسم: ${S.sec.title}`,`النوع: ${kindName(r.mode)}`,
+    `الدرجة: ${r.score} من ${r.total}`,`النسبة: ${r.pct}%`,`النقاط: ${r.pts}`,`الزمن المستغرق: ${mmss(r.secs)}`,`التاريخ: ${dateAr(r.date)}`,
+    `أرقام الأسئلة الخاطئة: ${wrong.length?wrong.join('، '):'لا يوجد'}`,'','— أُرسلت من المنصة'].join('\n')}
+function openMail(subject,body){
+  let b=body;if(encodeURIComponent(b).length>1800)b=b.slice(0,600)+'\n…';
+  location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(b)}
+function copyText(t){
+  const fb=()=>{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('تم نسخ النتيجة')}catch(e){toast('تعذّر النسخ')}a.remove()};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>toast('تم نسخ النتيجة'),fb);else fb()}
+function reportText(){
+  const u=user(),lines=[`التقرير العام — ${PLATFORM}`,`الاسم: ${u.name}`,`الجوال: ${u.phone}`,''];
+  SECTIONS.forEach(s=>{const parts=['train','quiz','final'].map(m=>{const b=bestOf(u,s.id,m);return b===null?null:kindName(m)+' '+b+'%'}).filter(Boolean);
+    if(parts.length)lines.push(`${s.short}: ${parts.join(' | ')}`)});
+  const R=u.results;lines.push('',`عدد المحاولات: ${R.length}`,`مجموع النقاط: ${R.reduce((a,r)=>a+r.pts,0)}`,`التاريخ: ${dateAr(Date.now())}`);
+  return lines.join('\n')}
+
+/* ============ الشهادة ============ */
+function showCert(){
+  const u=user(),r=S.res;
+  $('#cert').innerHTML=`<div class="certbox"><div class="certbar"><button class="btn amber" data-a="print">طباعة / حفظ PDF</button><button class="btn sec" data-a="closecert">إغلاق</button></div>
+  <div class="cpage"><div style="font-size:.95rem;letter-spacing:.5px">${SCHOOL}</div>
+    <h1>شهادة إنجاز</h1><p>تشهد منصة التحصيلي التفاعلية في الفيزياء بأن الطالب</p>
+    <div><span class="nm">${esc(u.name)}</span></div>
+    <p>قد أتمّ بنجاح <b>${kindName(r.mode)}</b> في <b>${esc(S.sec.title)}</b></p>
+    <p>وحقّق درجة <b>${r.score} من ${r.total}</b> بنسبة <b>${r.pct}%</b>${r.pct>=80?' — بتقدير <b>متميّز</b>':r.pct>=60?' — بتقدير <b>جيّد</b>':''}</p>
+    <p style="font-size:.95rem;color:#6b5a2c">التاريخ: ${dateAr(r.date)}</p>
+    <div class="sig"><div>${TEACHER_TITLE}<br><b>${TEACHER}</b></div><div>${r.pct>=80?medalSvg(34):''}</div></div></div></div>`;
+  $('#cert').className='show'}
+
+/* ============ توزيع الأحداث ============ */
+const A={
+  open:d=>openStart(d.s,d.m),
+  closeov:()=>{const o=$('#ov');o&&o.remove()},
+  go:d=>{const r=$('#rnd')?$('#rnd').checked:false;A.closeov();start(d.s,d.m,r)},
+  pick:d=>pick(+d.i),
+  next:()=>{if(S.mode==='train'&&S.i===S.qs.length-1){finish();return}if(S.i<S.qs.length-1){S.i++;renderQ(true)}},
+  prev:()=>{if(S.i>0){S.i--;renderQ(true)}},
+  go2:d=>{S.i=+d.i;renderQ(true)},
+  finish:()=>{const un=S.qs.length-S.ans.filter(x=>x!==undefined).length;
+    if(un>0&&!confirm('لديك '+un+' سؤالاً بلا إجابة. هل تريد التسليم؟'))return;
+    if(un===0&&!confirm('هل تريد تسليم الاختبار الآن؟'))return;finish()},
+  home:()=>{if(S&&!S.done&&!confirm('سيتم الخروج دون حفظ هذه المحاولة. هل تريد المتابعة؟'))return;viewHome()},
+  logout:()=>{db.cur=null;save();viewLogin()},
+  reset:()=>{if(confirm('هل تريد مسح جميع نتائجك المحفوظة في هذا المتصفح؟')){user().results=[];save();viewHome()}},
+  mail:()=>openMail(`نتيجة ${user().name} — ${S.sec.short} (${kindName(S.res.mode)})`,summaryText()),
+  copy:()=>copyText(summaryText()),
+  report:()=>openMail(`التقرير العام — ${user().name}`,reportText()),
+  cert:showCert,
+  print:()=>window.print(),
+  closecert:()=>{$('#cert').className='';$('#cert').innerHTML=''},
+  again:()=>openStart(S.sec.id,S.mode),
+  rvall:()=>viewResultKeep(true),
+  rverr:()=>viewResultKeep(false)
+};
+function viewResultKeep(all){const y=window.scrollY;viewResult(all);window.scrollTo(0,$('.rv').offsetTop-10)}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t||t.disabled)return;const f=A[t.dataset.a];f&&f(t.dataset)});
+document.addEventListener('keydown',e=>{
+  if(!S||S.done||document.getElementById('ov')||e.target.tagName==='INPUT')return;
+  const k=toEn(e.key);
+  if(/^[1-4]$/.test(k)){pick(+k-1)}
+  else if(e.key==='Enter'||e.key==='ArrowLeft'){const b=document.querySelector('[data-a="next"]');if(b&&!b.disabled)b.click()}
+  else if(e.key==='ArrowRight'&&S.mode!=='train'){A.prev()}});
+window.addEventListener('beforeunload',e=>{if(S&&!S.done){e.preventDefault();e.returnValue=''}});
+
+/* بدء التشغيل */
+user()?viewHome():viewLogin();
+</script>
+</body>
+</html>
